@@ -2,6 +2,7 @@ import parcel.FragileParcel;
 import parcel.Parcel;
 import parcel.PerishableParcel;
 import parcel.StandardParcel;
+import parcel.tracking.Trackable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,8 @@ import java.util.Scanner;
 public class DeliveryApp {
 
     private static final Scanner scanner = new Scanner(System.in);
-    private static List<Parcel> allParcels = new ArrayList<>();
+    private static final List<Parcel> allParcels = new ArrayList<>();
+    private static final List<Trackable> trackableParcels = new ArrayList<>();
 
     public static void main(String[] args) {
         boolean running = true;
@@ -19,20 +21,12 @@ public class DeliveryApp {
             int choice = Integer.parseInt(scanner.nextLine());
 
             switch (choice) {
-                case 1:
-                    addParcel();
-                    break;
-                case 2:
-                    sendParcels();
-                    break;
-                case 3:
-                    calculateCosts();
-                    break;
-                case 0:
-                    running = false;
-                    break;
-                default:
-                    System.out.println("Неверный выбор.");
+                case 1 -> addParcel();
+                case 2 -> sendParcels();
+                case 3 -> calculateCosts();
+                case 4 -> changeReportStatus();
+                case 0 -> running = false;
+                default -> System.out.println("Неверный выбор.");
             }
         }
     }
@@ -42,6 +36,7 @@ public class DeliveryApp {
         System.out.println("1 — Добавить посылку");
         System.out.println("2 — Отправить все посылки");
         System.out.println("3 — Посчитать стоимость доставки");
+        System.out.println("4 - Изменить статус для отслеживаемых посылок");
         System.out.println("0 — Завершить");
     }
 
@@ -85,6 +80,9 @@ public class DeliveryApp {
             perishableParcel.setTimeToLive(timeToLive);
         }
         allParcels.add(parcel);
+        if(parcel instanceof Trackable) {
+            trackableParcels.add((Trackable) parcel);
+        }
     }
 
     private static void sendParcels() {
@@ -103,6 +101,14 @@ public class DeliveryApp {
             costs += parcel.calculateDeliveryCost();
         }
         System.out.println("Стоимость доставки всех посылок: " + costs + "\n");
+    }
+
+    private static void changeReportStatus() {
+        for (Trackable trackableParcel : trackableParcels) {
+            System.out.println("Введите новое нахождение посылки " + ((Parcel) trackableParcel).getDescription());
+            String newLocation = scanner.nextLine();
+            trackableParcel.reportStatus(newLocation);
+        }
     }
 
 }
