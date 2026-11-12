@@ -24,7 +24,7 @@ public class PerishableParcel extends Parcel {
     @Override
     public String toString() {
         return "PerishableParcel{ " +
-                "timeToLive=" + timeToLive +
+                "timeToLive=" + timeToLive + ", " +
                 super.toString() + " }";
     }
 }

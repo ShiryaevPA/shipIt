@@ -35,7 +35,11 @@ public abstract class Parcel {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        if(weight > 0) {
+            this.weight = weight;
+        } else {
+            System.out.println("Вес должен быть больше нуля");
+        }
     }
 
     public int getSendDay() {
@@ -43,7 +47,11 @@ public abstract class Parcel {
     }
 
     public void setSendDay(int sendDay) {
-        this.sendDay = sendDay;
+        if(sendDay > 0 && sendDay < 32) {
+            this.sendDay = sendDay;
+        } else {
+            System.out.println("День отправки должен быть от 1 до 31");
+        }
     }
 
     public void packageItem() {

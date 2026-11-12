@@ -130,7 +130,7 @@ public class DeliveryApp {
     private static <T extends Parcel> void printBox(ParcelBox<T> box) {
         List<T> parcelsInBox = box.getAllParcels();
         if (parcelsInBox.isEmpty()) {
-            System.out.println("Посылок в коробке нет");
+            System.out.println("Посылок в коробке нет\n");
         } else {
             for (T parcel : parcelsInBox) {
                 System.out.println("Посылка " + parcel.toString());
