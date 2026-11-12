@@ -6,4 +6,9 @@ public class StandardParcel extends Parcel {
     public int calculateDeliveryCost() {
         return getWeight() * STANDARD_BASE_COST;
     }
+
+    @Override
+    public String toString() {
+        return "StandardParcel{ " + super.toString() + " }";
+    }
 }

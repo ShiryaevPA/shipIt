@@ -56,4 +56,11 @@ public abstract class Parcel {
 
     public abstract int calculateDeliveryCost();
 
+    @Override
+    public String toString() {
+        return "description='" + description + '\'' +
+                ", deliveryAddress='" + deliveryAddress + '\'' +
+                ", weight=" + weight +
+                ", sendDay=" + sendDay;
+    }
 }

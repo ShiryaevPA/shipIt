@@ -20,4 +20,11 @@ public class PerishableParcel extends Parcel {
     public int calculateDeliveryCost() {
         return getWeight() * PERISHABLE_BASE_COST;
     }
+
+    @Override
+    public String toString() {
+        return "PerishableParcel{ " +
+                "timeToLive=" + timeToLive +
+                super.toString() + " }";
+    }
 }
